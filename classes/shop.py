@@ -8,4 +8,6 @@ class Shop(Storage):
         self.dd = 5
         self.t = "в магазине"
         self.f = "из магазина"
+        self.p = [{"из магазин": self, "c магазин": self},
+                  {"в магазин": self}]
 

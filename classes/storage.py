@@ -5,6 +5,8 @@ class Storage():
     def __init__(self):
         self.items = {}
         self.t = "на объекте"
+        self.f = "с объекта"
+        self.p = [{}, {}]
 
     def check_r(self, x, y):
         if self.items.get(x) is None:

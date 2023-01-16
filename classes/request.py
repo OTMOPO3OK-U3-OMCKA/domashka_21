@@ -5,7 +5,7 @@ class Request:
     PRODUCT = None
 
     def __init__(self, ab: list, a: str):
-        self.ab = ab
+        self.ab = self.hhh(ab)
         self.a = a
         self.FROM = self._get_ab(self.ab[0])
         self.TO = self._get_ab(self.ab[1])
@@ -37,3 +37,9 @@ class Request:
             if i.isdigit():
                 return int(i)
 
+    def hhh(self, l: list):
+        ww = [{}, {}]
+        for i in l:
+            for ii in range(2):
+                ww[ii].update(i.p[ii])
+        return ww
