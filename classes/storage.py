@@ -1,75 +1,75 @@
 class Storage():
     capacity = 100
-    dd = None
+    limit = None
 
     def __init__(self):
         self.items = {}
-        self.t = "на объекте"
-        self.f = "с объекта"
-        self.p = [{}, {}]
+        self.to_place = "на объекте"
+        self.from_place = "с объекта"
+        self.words_to_read = [{}, {}]
 
-    def check_r(self, x, y):
-        if self.items.get(x) is None:
-            print(f"этого товара нет в наличии {self.t}")
+    def check_availability_prod(self, product, count):
+        if self.items.get(product) is None:
+            print(f"этого товара нет в наличии {self.to_place}")
             return False
-        if type(y) is not int:
+        if type(count) is not int:
             print("количество товара введено неверно")
             return False
-        if self.items.get(x) < y:
-            print(f"Не хватает {self.t}, попробуйте заказать меньше")
+        if self.items.get(product) < count:
+            print(f"Не хватает {self.to_place}, попробуйте заказать меньше")
             return False
         return True
 
-    def check_a(self, x, y):
-        if type(x) is not str:
+    def checking_entry_product(self, product, count):
+        if type(product) is not str:
             print("недопустимый товар")
             return False
-        if type(y) is not int:
+        if type(count) is not int:
             print("количество товара введено неверно")
             return False
-        if sum(self.items.values(), y) > self.capacity:
-            print(f"{self.t} недостаточно места, попробуйте меньше")
+        if sum(self.items.values(), count) > self.capacity:
+            print(f"{self.to_place} недостаточно места, попробуйте меньше")
             return False
-        if self.dd is not None:
-            if len(self.items.keys()) >= self.dd:
-                print(f"{self.t} недостаточно места, попробуйте другой товар")
+        if self.limit is not None:
+            if len(self.items.keys()) >= self.limit:
+                print(f"{self.to_place} недостаточно места, попробуйте другой товар")
                 return False
         return True
 
-    def _add(self, x, y):
-        if self.items.get(x) is None:
-            self.items[x] = y
+    def _add(self, product, count):
+        if self.items.get(product) is None:
+            self.items[product] = count
         else:
-            self.items[x] += y
+            self.items[product] += count
 
-    def _remove(self, x, y):
-        self.items[x] -= y
-        if self.items.get(x) == 0:
-            self.items.pop(x)
-        print(f"нужное количество есть {self.t}")
+    def _remove(self, product, count):
+        self.items[product] -= count
+        if self.items.get(product) == 0:
+            self.items.pop(product)
+        print(f"нужное количество есть {self.to_place}")
 
     def get_free_space(self):
         c = self.capacity - sum(self.items.values())
-        print(f"{self.t} {c} свободных мест")
+        print(f"{self.to_place} {c} свободных мест")
 
     def get_items(self):
         if len(self.items) == 0:
-            print(f"{self.t} нет товара")
+            print(f"{self.to_place} нет товара")
         else:
-            print(f"{self.t} хранится:")
+            print(f"{self.to_place} хранится:")
             for i, v in self.items.items():
                 print(f"{v} {i}")
 
     def get_unique_items_count(self):
-        t = []
+        product_list = []
         for i in self.items.keys():
-            t.append(i)
-        return t
+            product_list.append(i)
+        return product_list
 
-    def get_add_and_check(self, x, y):
-        if self.check_a(x, y):
-            self._add(x, y)
+    def get_add_and_check(self, product, count):
+        if self.checking_entry_product(product, count):
+            self._add(product, count)
 
-    def get_remove_and_check(self, x, y):
-        if self.check_r(x, y):
-            self._remove(x, y)
+    def get_remove_and_check(self, product, count):
+        if self.check_availability_prod(product, count):
+            self._remove(product, count)

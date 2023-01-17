@@ -5,9 +5,9 @@ class Shop(Storage):
     def __init__(self):
         self.capacity = 20
         self.items = {}
-        self.dd = 5
-        self.t = "в магазине"
-        self.f = "из магазина"
-        self.p = [{"из магазин": self, "c магазин": self},
-                  {"в магазин": self}]
+        self.limit = 5
+        self.to_place = "в магазине"
+        self.from_place = "из магазина"
+        self.words_to_read = [{"из магазин": self, "c магазин": self},
+                              {"в магазин": self}]
 
